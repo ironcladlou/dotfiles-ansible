@@ -1,0 +1,17 @@
+- name: install bare minimum packages directly
+  sudo: true
+  command: dnf install -y python-dnf
+
+- name: install sudo dependencies
+  sudo: true
+  dnf: name=libselinux-python state=present
+
+- name: configure passwordless sudo
+  sudo: true
+  template:
+    src=wheel
+    dest=/etc/sudoers.d/wheel
+    owner=root
+    group=root
+    mode=0440
+

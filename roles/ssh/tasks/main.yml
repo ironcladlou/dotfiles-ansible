@@ -1,0 +1,5 @@
+- name: configure ssh
+  template:
+    src=config
+    dest="{{ homedir }}/.ssh/config"
+    mode=0600

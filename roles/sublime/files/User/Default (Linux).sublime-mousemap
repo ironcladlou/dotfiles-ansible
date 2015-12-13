@@ -1,0 +1,16 @@
+[
+    {
+        "button": "button1", 
+        "count": 1, 
+        "modifiers": ["ctrl"],
+        "command": "gotools_goto_def"
+    },
+    {
+        "button": "button3", 
+        "count": 1, 
+        "command": "gotools_debug",
+        "args": {
+          "command": "toggle_breakpoint"
+        }
+    }
+]

@@ -1,0 +1,19 @@
+- name: install git
+  sudo: true
+  dnf: name=git state=present
+
+- name: configure git (gitconfig)
+  template:
+    src=gitconfig
+    dest="{{ homedir }}/.gitconfig"
+    owner="{{ username }}"
+    group="{{ username }}"
+    mode=0600
+
+- name: configure git (gitignore)
+  template:
+    src=gitignore_global
+    dest="{{ homedir }}/.gitignore_global"
+    owner="{{ username }}"
+    group="{{ username }}"
+    mode=0600

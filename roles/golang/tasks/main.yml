@@ -1,0 +1,10 @@
+- name: download golang 1.4
+  get_url:
+    url=https://storage.googleapis.com/golang/go1.4.3.linux-amd64.tar.gz
+    dest="{{ temp_dir }}"
+
+- name: unpack golang
+  sudo: true
+  unarchive:
+    src="{{ temp_dir }}/go1.4.3.linux-amd64.tar.gz"
+    dest="/opt"

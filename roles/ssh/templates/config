@@ -1,0 +1,56 @@
+Host *
+  ServerAliveInterval 120
+  ServerAliveCountMax 60
+  TCPKeepAlive=yes
+
+Host github.com
+  User ironcladlou
+  IdentityFile ~/.ssh/thinkpad_id_rsa
+
+Host *.amazonaws.com
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile ~/.ssh/aws_known_hosts
+  IdentityFile ~/.ssh/libra.pem
+  PasswordAuthentication no
+  GSSAPIAuthentication no
+  ControlPersist 10m
+  AddressFamily inet
+  Ciphers arcfour,blowfish-cbc
+  Compression yes
+
+Host *.dev.rhcloud.com
+  IdentityFile ~/.ssh/libra_id_rsa
+  ServerAliveInterval 45
+  TCPKeepAlive=yes
+  StrictHostKeyChecking=no
+  PasswordAuthentication no
+  GSSAPIAuthentication no
+  ControlPersist 10m
+  AddressFamily inet
+  Ciphers arcfour,blowfish-cbc
+  Compression yes
+
+Host *.stg.rhcloud.com
+  IdentityFile ~/.ssh/libra_id_rsa
+  ServerAliveInterval 120
+  TCPKeepAlive=yes
+  StrictHostKeyChecking=no
+  PasswordAuthentication no
+  GSSAPIAuthentication no
+  ControlPersist 10m
+  AddressFamily inet
+  Ciphers arcfour,blowfish-cbc
+  Compression yes
+
+Host *.int.rhcloud.com
+  IdentityFile ~/.ssh/libra_id_rsa
+  ServerAliveInterval 120
+  TCPKeepAlive=yes
+  StrictHostKeyChecking=no
+  PasswordAuthentication no
+  GSSAPIAuthentication no
+  ControlPersist 10m
+  AddressFamily inet
+  Ciphers arcfour,blowfish-cbc
+  Compression yes

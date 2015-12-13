@@ -1,0 +1,23 @@
+- name: install fonts
+  copy: src="{{ item }}" dest={{ homedir }}/.local/share/fonts/
+  with_fileglob:
+  - "ttf/*.ttf"
+
+- name: register fonts
+  command: "mkfontscale && mkfontdir"
+
+# https://www.reddit.com/r/Fedora/comments/3o6ijr/trying_fedora_23_for_the_first_time_why_do_fonts/
+- name: install rpmfusion
+  sudo: yes
+  dnf: "name={{ item }} state=present"
+  with_items:
+  - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm
+  - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
+  - freetype-freeworld
+
+- name: configure fonts
+  sudo: true
+  file:
+    src="{{ playbook_dir }}/roles/fonts/files/goodfonts.conf"
+    dest=/etc/fonts/conf.d/99-goodfonts.conf
+    state=link

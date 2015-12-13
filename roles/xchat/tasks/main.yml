@@ -1,0 +1,13 @@
+- name: install xchat
+  sudo: true
+  dnf: name=xchat state=present
+
+- name: set up xchat config directory
+  file:
+    path="{{ homedir }}/.config/xchat2"
+    state=directory
+
+- name: configure xchat
+  copy: src={{ item }} dest={{ homedir }}/.config/xchat2/{{ item | basename }}
+  with_fileglob:
+  - "*.conf"

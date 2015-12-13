@@ -1,0 +1,2 @@
+xcape_temp_dir: "{{ temp_dir }}/xcape"
+

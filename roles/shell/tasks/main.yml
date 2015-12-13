@@ -1,0 +1,6 @@
+- name: link bashrc
+  file:
+    src="{{ playbook_dir }}/roles/shell/files/bashrc"
+    dest="{{ homedir }}/.bashrc"
+    state=link
+    force=yes

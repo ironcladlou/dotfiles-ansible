@@ -1,0 +1,11 @@
+- name: install tmux
+  dnf: name=tmux state=present
+  sudo: true
+
+- name: configure tmux
+  file:
+    src: "{{ playbook_dir }}/roles/tmux/files/tmux.conf"
+    dest: "{{ homedir }}/.tmux.conf"
+    mode: 0755
+    state: link
+

@@ -1,0 +1,55 @@
+- name: install xcape dependencies
+  dnf: "name={{ item }} state=present"
+  sudo: true
+  with_items:
+  - libX11-devel
+  - gcc
+  - make
+  - pkgconfig
+  - libXtst-devel
+  - libXi-devel
+
+- stat: path=/usr/local/bin/xcape
+  register: xcape_bin
+
+- name: checkout xcape
+  git:
+    repo: https://github.com/alols/xcape.git
+    dest: "{{ xcape_temp_dir }}"
+    force: no
+    accept_hostkey: yes
+  when: not xcape_bin.stat.exists
+
+- name: build xcape
+  command: "make"
+  args:
+    chdir: "{{ xcape_temp_dir }}"
+  when: not xcape_bin.stat.exists
+
+- name: install xcape
+  sudo: true
+  copy:
+    src: "{{ xcape_temp_dir }}/xcape"
+    dest: /usr/local/bin/xcape
+    mode: 0755
+
+- name: create service directory
+  file: path="{{ homedir }}/.config/systemd/user" state=directory mode=0700
+
+- name: create xcape service unit
+  template:
+    src=xcape.service
+    dest="{{ homedir }}/.config/systemd/user/xcape.service"
+    owner="{{ username }}"
+    group="{{ username }}"
+    mode=0700
+
+- name: enable xcape service
+  command: systemctl --user enable xcape.service
+
+- name: start xcape service
+  command: systemctl --user restart xcape
+
+- name: configure capslock as control
+  command: dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps']"
+

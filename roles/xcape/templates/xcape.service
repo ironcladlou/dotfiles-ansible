@@ -1,0 +1,12 @@
+[Unit]
+Description=xcape
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/local/bin/xcape -t 300 -d -e '#66=Escape'
+StandardError=null
+StandardOutput=null
+Restart=always
+
+[Install]
+WantedBy=default.target

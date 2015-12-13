@@ -1,0 +1,52 @@
+- stat: path="{{ temp_dir }}/sublime-current.tar.bz2"
+  register: sublime_archive
+
+- name: download sublime dev build
+  get_url:
+    url=http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3095_x64.tar.bz2
+    dest="{{ temp_dir }}/sublime-current.tar.bz2"
+    mode=0440
+  when: not sublime_archive.stat.exists
+
+- name: clean up old build
+  file:
+    path="{{ temp_dir }}/sublime_text_3"
+    state=absent
+
+- name: unpack sublime
+  unarchive:
+    src="{{ temp_dir }}/sublime-current.tar.bz2"
+    dest="{{ temp_dir }}"
+
+- name: create sublime directory
+  sudo: true
+  file:
+    path=/opt/sublime_text_3
+    state=directory
+    owner=root
+    group=root
+
+- name: install sublime
+  sudo: true
+  synchronize:
+    src="{{ temp_dir }}/sublime_text_3"
+    dest=/opt
+    group=no
+    owner=no
+
+- name: install sublime .desktop file
+  copy:
+    src=sublime_text_3.desktop
+    dest="{{ homedir }}/.local/share/applications/sublime_text_3.desktop"
+
+- name: prepare sublime config dir
+  file:
+    path="{{ homedir }}/.config/sublime-text-3/Packages/User"
+    state=absent
+
+- name: configure sublime
+  file:
+    src="{{ playbook_dir }}/roles/sublime/files/User"
+    dest="{{ homedir }}/.config/sublime-text-3/Packages/User"
+    state=link
+    force=yes

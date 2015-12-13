@@ -1,0 +1,7 @@
+- name: install docker
+  sudo: true
+  dnf: name=docker state=present
+
+- name: enable docker
+  sudo: true
+  service: name=docker enabled=yes state=restarted

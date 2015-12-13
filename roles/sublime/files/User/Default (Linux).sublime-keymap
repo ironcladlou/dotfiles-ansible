@@ -1,0 +1,15 @@
+[
+  { "keys": ["alt+]"], "command": "next_view" },
+  { "keys": ["alt+["], "command": "prev_view" },
+  { "keys": ["alt+g"], "command": "gotools_goto_def" },
+  { "keys": ["ctrl+space"], "command": "auto_complete" },
+  { "keys": ["ctrl+alt+b"], "command": "build", "args": {"variant": "Origin Unit Tests"}},
+  { "keys": ["alt+s"], "command": "save" },
+  { "keys": ["ctrl+\\"], "command": "wrap_lines"},
+  { "keys" : ["ctrl+alt+i"], "command" : "gotools_oracle" , "args" : {"command": "implements"}},
+  { "keys": ["ctrl+."], "command": "next_result" },
+  { "keys": ["ctrl+,"], "command": "prev_result" },
+  { "keys" : ["ctrl+'", "ctrl+b"], "command" : "show_panel" , "args" : {"panel": "output.exec", "toggle": true}},
+  { "keys" : ["ctrl+'", "ctrl+o"], "command" : "show_panel" , "args" : {"panel": "output.gotools_oracle", "toggle": true}},
+  { "keys" : ["ctrl+'", "ctrl+d"], "command" : "show_panel" , "args" : {"panel": "output.gotools.debug.session", "toggle": true}}
+]

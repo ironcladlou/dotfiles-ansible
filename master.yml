@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+  - username: dmace
+  - fullname: Dan Mace
+  - personal_email: ironcladlou@gmail.com
+  - company_email: dmace@redhat.com
+  - homedir: "/home/{{ username }}"
+  - temp_dir: "{{ homedir }}/.ansible/tmp"
+  roles:
+  - role: sudo
+    tags:
+    - sudo
+    - bootstrap
+  - role: ssh
+    tags:
+    - ssh
+    - bootstrap
+  - role: git
+    tags:
+    - git
+    - bootstrap
+  - role: xcape
+    tags:
+    - xcape
+    - hardware
+  - role: tmux
+    tags:
+    - tmux
+    - workflow
+  - role: redshift
+    tags:
+    - redshift
+    - de
+  - role: sublime
+    tags:
+    - sublime
+  - role: shell
+    tags:
+    - shell
+  - role: fonts
+    tags:
+    - fonts
+  - role: spotify
+    tags:
+    - spotify
+  - role: golang
+    tags:
+    - golang
+  - role: docker
+    tags:
+    - docker
+  - role: pidgin
+    tags:
+    - pidgin
+  - role: xchat
+    tags:
+    - xchat
